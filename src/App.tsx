@@ -2,7 +2,8 @@ import React, { useRef } from "react";
 import Hero from "./components/Hero";
 import Experience from "./components/Experience";
 import Navbar from "./components/Navbar";
-import Projects from "./components/Projects";
+import ProjectsSection from "./components/ProjectsSection";
+import Skills from "./components/Skills";
 
 const App = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -12,18 +13,21 @@ const App = () => {
       <Navbar scrollRef={scrollRef} />
       <div
         ref={scrollRef}
-        className="h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth"
+        className="h-screen overflow-y-auto scroll-smooth sm:snap-y sm:snap-mandatory"
       >
-        <section id="hero" className="snap-start h-screen">
+        <section id="hero" className="snap-start min-h-screen sm:h-screen">
           <Hero />
         </section>
-        <section id="experience" className="snap-start h-screen">
+        <section id="experience" className="snap-start min-h-screen sm:h-screen">
           <Experience />
         </section>
-        <section id="projects" className="snap-start h-screen">
-          <Projects/>
+        <section id="projects" className="snap-start min-h-screen sm:h-screen">
+          <ProjectsSection />
         </section>
-        {/* Add more sections like Projects, Skills, etc. */}
+        <section id="skills" className="snap-start min-h-screen sm:h-screen">
+          {/* Skills section can be added here */}
+          <Skills/>
+        </section>
       </div>
     </>
   );

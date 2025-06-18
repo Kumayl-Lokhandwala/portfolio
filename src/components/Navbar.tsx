@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 interface NavbarProps {
   scrollRef: React.RefObject<HTMLDivElement | null>;
-}
+}   
 
 const Navbar: React.FC<NavbarProps> = ({ scrollRef }) => {
   const [visible, setVisible] = useState(false);
