@@ -38,8 +38,7 @@
       <section className="relative bg-[#0b0f19] text-white px-4 sm:px-6 pt-20 pb-32 font-sans overflow-x-hidden">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-center mb-16 bg-clip-text text-transparent bg-gradient-to-r from-sky-400 to-cyan-300">
-            Experience
-          </h2>
+My Developer Journey          </h2>
 
           <div className="relative">
             {/* Vertical timeline line */}
