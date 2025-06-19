@@ -14,24 +14,31 @@ const App = () => {
       <Navbar scrollRef={scrollRef} />
       <div
         ref={scrollRef}
-        className="h-screen overflow-y-auto scroll-smooth sm:snap-y sm:snap-mandatory"
+        className="h-screen overflow-y-auto scroll-smooth"
       >
-        <section id="hero" className="snap-start h-auto sm:h-screen">
+        {/* Hero Section - Let it determine its own height */}
+        <section id="hero" className="snap-start">
           <Hero />
         </section>
-        <section id="experience" className="snap-start h-auto sm:h-screen">
+
+        {/* Experience Section - Let it determine its own height */}
+        <section id="experience" className="snap-start">
           <Experience />
         </section>
-        <section id="projects" className="snap-start h-auto sm:h-screen">
+
+        {/* Projects Section - Let it determine its own height */}
+        <section id="projects" className="snap-start">
           <ProjectsSection />
         </section>
-        <section id="skills" className="snap-start h-auto sm:h-screen">
-          {/* Skills section can be added here */}
-          <Skills/>
+
+        {/* Skills Section - Let it determine its own height */}
+        <section id="skills" className="snap-start">
+          <Skills />
         </section>
-        <section id="contact" className="snap-start h-auto sm:h-screen">
-          {/* Contact section can be added here */}
-          <ContactMe/>
+
+        {/* Contact Section - Let it determine its own height */}
+        <section id="contact" className="snap-start">
+          <ContactMe />
         </section>
       </div>
     </>

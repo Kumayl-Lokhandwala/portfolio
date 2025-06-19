@@ -36,29 +36,30 @@ const ContactMe: React.FC = () => {
       [name]: value
     }));
   };
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setIsSubmitting(true);
+  
+  try {
+    const formspreeEndpoint = import.meta.env.VITE_FORMSPREE_ENDPOINT;
+    await axios.post(formspreeEndpoint, formData);
+    setSubmitStatus('success');
+    setFormData({ email: '', phone: '', message: '' });
+  } catch (error) {
+    setSubmitStatus('error');
+    console.error('Error submitting form:', error);
+  } finally {
+    setIsSubmitting(false);
+    setTimeout(() => setSubmitStatus(null), 5000);
+  }
+};
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    try {
-      await axios.post('https://formspree.io/f/YOUR_FORMSPREE_ID', formData);
-      setSubmitStatus('success');
-      setFormData({ email: '', phone: '', message: '' });
-    } catch (error) {
-      setSubmitStatus('error');
-      console.error('Error submitting form:', error);
-    } finally {
-      setIsSubmitting(false);
-      setTimeout(() => setSubmitStatus(null), 5000);
-    }
-  };
 
   const socialLinks: SocialLink[] = [
     {
       name: 'Email',
       icon: <FiMail className="text-2xl" />,
-      url: 'mailto:your.email@example.com',
+      url: 'mailto:kumayllokhandwala04@gmail.com',
       color: 'bg-gradient-to-r from-red-500 to-pink-500'
     },
     {
@@ -76,7 +77,7 @@ const ContactMe: React.FC = () => {
     {
       name: 'LeetCode',
       icon: <SiLeetcode className="text-2xl" />,
-      url: 'https://leetcode.com/your-username',
+      url: 'https://leetcode.com/kumayl_lokhandwala',
       color: 'bg-gradient-to-r from-amber-500 to-amber-300'
     }
   ];
@@ -235,11 +236,11 @@ const ContactMe: React.FC = () => {
                 <div className="space-y-3">
                   <div className="flex items-center space-x-4">
                     <FiMail className="text-sky-400 text-xl" />
-                    <span className="text-gray-300">your.email@example.com</span>
+                    <span className="text-gray-300">kumayllokhandwala04@gmail.com</span>
                   </div>
                   <div className="flex items-center space-x-4">
                     <FiPhone className="text-sky-400 text-xl" />
-                    <span className="text-gray-300">+1 (123) 456-7890</span>
+                    <span className="text-gray-300">+91 9004372229</span>
                   </div>
                 </div>
               </div>
