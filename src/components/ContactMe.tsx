@@ -64,13 +64,13 @@ const ContactMe: React.FC = () => {
     {
       name: 'LinkedIn',
       icon: <FiLinkedin className="text-2xl" />,
-      url: 'https://linkedin.com/in/your-profile',
+      url: 'https://linkedin.com/in/kumayl-lokhandwala',
       color: 'bg-gradient-to-r from-blue-600 to-blue-400'
     },
     {
       name: 'GitHub',
       icon: <FiGithub className="text-2xl" />,
-      url: 'https://github.com/your-username',
+      url: 'https://github.com/kumayl-lokhandwala',
       color: 'bg-gradient-to-r from-gray-800 to-gray-600'
     },
     {

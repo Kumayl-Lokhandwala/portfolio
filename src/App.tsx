@@ -16,20 +16,20 @@ const App = () => {
         ref={scrollRef}
         className="h-screen overflow-y-auto scroll-smooth sm:snap-y sm:snap-mandatory"
       >
-        <section id="hero" className="snap-start min-h-screen sm:h-screen">
+        <section id="hero" className="snap-start h-auto sm:h-screen">
           <Hero />
         </section>
-        <section id="experience" className="snap-start min-h-auto sm:h-screen">
+        <section id="experience" className="snap-start h-auto sm:h-screen">
           <Experience />
         </section>
-        <section id="projects" className="snap-start min-h-screen sm:h-screen">
+        <section id="projects" className="snap-start h-auto sm:h-screen">
           <ProjectsSection />
         </section>
-        <section id="skills" className="snap-start min-h-screen sm:h-screen">
+        <section id="skills" className="snap-start h-auto sm:h-screen">
           {/* Skills section can be added here */}
           <Skills/>
         </section>
-        <section id="contact" className="snap-start min-h-screen sm:h-screen">
+        <section id="contact" className="snap-start h-auto sm:h-screen">
           {/* Contact section can be added here */}
           <ContactMe/>
         </section>
