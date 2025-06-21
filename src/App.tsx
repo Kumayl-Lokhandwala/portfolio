@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import Hero from "./components/Hero";
 import Experience from "./components/Experience";
 import Navbar from "./components/Navbar";
