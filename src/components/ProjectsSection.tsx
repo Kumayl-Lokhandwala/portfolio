@@ -152,7 +152,7 @@ const ProjectsSection = () => {
           <a
             className="px-6 py-3 text-sm font-medium rounded-full border border-sky-400 text-sky-300 hover:bg-sky-400/20 transition-all duration-300 shadow-md shadow-sky-500/20 backdrop-blur-md flex items-center gap-2"
             target="_blank"
-            href="https://github.com/machadop1407"
+            href="https://github.com/kumayl-lokhandwala"
           >
             Check My Github <ArrowRight size={16} />
           </a>
