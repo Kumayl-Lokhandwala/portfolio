@@ -14,7 +14,7 @@ const App = () => {
       <Navbar scrollRef={scrollRef} />
       <div
         ref={scrollRef}
-        className="h-screen overflow-y-auto scroll-smooth"
+        className="h-screen overflow-y-auto scroll-smooth overflow-x-hidden"
       >
         {/* Hero Section - Let it determine its own height */}
         <section id="hero" className="snap-start">
