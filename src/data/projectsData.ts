@@ -20,7 +20,7 @@ const projectsData: Project[] = [
   {
     title: "X Clone",
     image: "/images/Projects/xclone.png",
-    link: "https://",
+    link: "https://github.com/Kumayl-Lokhandwala/Twitter-Clone",
   },
   {
     title: "PixelTube",
@@ -53,9 +53,9 @@ const projectsData: Project[] = [
     link: "https://github.com/yourusername/toxicity-detector",
   },
   {
-    title: "FlyEasy - Airport System",
+    title: "FlyEasy - Airport Management System",
     image: "/images/Projects/flyeasy.png",
-    link: "https://github.com/yourusername/flyeasy-airport",
+    link: "https://fly-easy.vercel.app/",
   },
 ];
 
