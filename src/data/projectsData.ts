@@ -8,24 +8,29 @@ export interface Project {
 
 const projectsData: Project[] = [
   {
-    title: "X Clone",
-    image: "/images/Projects/image.png",
-    link: "https://github.com/yourusername/x-clone",
+    title: "Finance Dashboard",
+    image: "/images/Projects/finance-dashboard.png",
+    link: "https://financedashboard-portfolio.vercel.app/",
   },
   {
-    title: "Spotify Clone",
-    image: "/images/projects/spotifyclone.png",
-    link: "https://github.com/yourusername/spotify-clone",
+    title: "EchoBeats",
+    image: "/images/projects/echobeats.png",
+    link: "https://spotifyclone-portfolio.vercel.app/",
+  },
+  {
+    title: "X Clone",
+    image: "/images/projects/xclone.png",
+    link: "https://",
   },
   {
     title: "PixelTube",
     image: "/images/projects/pixeltube.png",
-    link: "https://github.com/yourusername/pixeltube",
+    link: "https://pixel-tube.vercel.app/",
   },
   {
     title: "BlinkIt Data Analysis",
-    image: "/images/projects/blinkit.png",
-    link: "https://github.com/yourusername/blinkit-analysis",
+    image: "/images/projects/blinkit-data-analysis.png",
+    link: "https://github.com/Kumayl-Lokhandwala/BlinkIt-Data-Analysis",
   },
   {
     title: "AI Book Recommender",
