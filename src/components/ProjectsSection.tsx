@@ -95,7 +95,9 @@ const ProjectsSection = () => {
               className="flex"
               style={{
                 width: `${(100 / visibleCount) * extendedItems.length}%`,
-                transform: `translateX(-${(100 / extendedItems.length) * index}%)`,
+                transform: `translateX(-${
+                  (100 / extendedItems.length) * index
+                }%)`,
                 transition: transitionEnabled ? "transform 0.6s ease" : "none",
               }}
             >
@@ -125,13 +127,13 @@ const ProjectsSection = () => {
                       <h3 className="text-2xl font-semibold text-sky-300 mb-2">
                         {project.title}
                       </h3>
-                      
+
                       <a
                         href={project.link}
                         target="_blank"
                         className="inline-flex items-center gap-1 text-sky-300 hover:underline text-base"
                       >
-                        View GitHub <ArrowRight size={18} />
+                        View Project <ArrowRight size={18} />
                       </a>
                     </div>
                   </a>
