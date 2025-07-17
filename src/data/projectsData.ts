@@ -20,7 +20,7 @@ const projectsData: Project[] = [
   {
     title: "X Clone",
     image: "/images/Projects/xclone.png",
-    link: "https://github.com/Kumayl-Lokhandwala/Twitter-Clone",
+    link: "https://twitter-clone-fuvp.onrender.com/",
   },
   {
     title: "PixelTube",
