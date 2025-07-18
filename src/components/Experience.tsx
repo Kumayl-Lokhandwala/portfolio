@@ -1,5 +1,5 @@
 import { motion, type Variants } from "framer-motion";
-import { Briefcase, Rocket, Cpu, BarChart, ArrowUpRight } from "lucide-react";
+import { Rocket, Cpu, BarChart } from "lucide-react";
 
 const experiences = [
   {

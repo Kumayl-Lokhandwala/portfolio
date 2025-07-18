@@ -205,7 +205,6 @@ const Skills: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>(
     skillCategories[0].name
   );
-  const [isHovering, setIsHovering] = useState(false);
 
   return (
     <section
