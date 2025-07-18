@@ -43,13 +43,6 @@ const Navbar: React.FC<NavbarProps> = ({ scrollRef }) => {
         <a href="#contact" className="hover:text-sky-400 transition">
           Contact
         </a>
-        <Link
-          to="/resume"
-          className="..."
-          onClick={() => window.scrollTo(0, 0)} // Scroll to top when switching to resume
-        >
-          Resume
-        </Link>
       </nav>
     </div>
   );
