@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface Skill {
   name: string;
@@ -25,6 +25,7 @@ const icons: Record<string, string> = {
 };
 
 const skillCategories: SkillCategoryType[] = [
+  // ... (your existing categories data)
   {
     name: "Programming Languages",
     color: "sky",
@@ -147,31 +148,37 @@ const SkillCategory: React.FC<SkillCategoryProps> = ({ category }) => {
       transition={{ duration: 0.5 }}
       className="mb-12 w-full"
     >
-      <h3 className="text-2xl font-bold mb-6 flex items-center gap-3 break-words break-all">
+      <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
         <span className="not-gradient-emoji">{icons[category.name]}</span>
         <span
-          className={`bg-clip-text text-transparent bg-gradient-to-r ${category.gradient} break-words break-all`}
+          className={`bg-clip-text text-transparent bg-gradient-to-r ${category.gradient}`}
         >
           {category.name}
         </span>
       </h3>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {category.skills.map((skill, idx) => (
           <motion.div
             key={idx}
-            className="bg-gradient-to-br from-[#1e293b]/80 to-[#0f172a]/90 border border-white/10 rounded-2xl p-6 shadow-lg hover:shadow-cyan-400/20 transition-all duration-300 flex flex-col"
-            whileHover={{ scale: 1.03 }}
+            className="bg-gradient-to-br from-[#1e293b]/80 to-[#0f172a]/90 border border-white/10 rounded-2xl p-5 shadow-xl hover:shadow-cyan-400/20 transition-all duration-300 flex flex-col backdrop-blur-sm"
+            whileHover={{
+              scale: 1.03,
+              boxShadow: "0 10px 30px rgba(56, 189, 248, 0.2)",
+            }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.2, delay: idx * 0.08 }}
           >
-            <div className="text-gray-200 font-semibold mb-3 text-base">
-              {skill.name}
+            <div className="flex justify-between items-start mb-3">
+              <div className="text-gray-200 font-semibold text-base">
+                {skill.name}
+              </div>
             </div>
-            <div className="w-full bg-gray-800/60 rounded-full h-4 mb-3 overflow-hidden relative">
+
+            <div className="w-full bg-gray-800/60 rounded-full h-2.5 mb-2 overflow-hidden relative">
               <motion.div
-                className={`h-4 rounded-full ${getBarColor(
+                className={`h-2.5 rounded-full ${getBarColor(
                   skill.percentage,
                   category.gradient
                 )}`}
@@ -180,11 +187,13 @@ const SkillCategory: React.FC<SkillCategoryProps> = ({ category }) => {
                 viewport={{ once: true }}
                 transition={{ type: "spring", stiffness: 90, damping: 15 }}
               />
-              <div className="absolute inset-0 h-4 rounded-full bg-gradient-to-r from-transparent to-white/10 animate-pulse" />
             </div>
-            <span className="text-xs text-cyan-300 font-bold">
-              {getSkillLevel(skill.percentage)}
-            </span>
+
+            <div className="flex justify-between">
+              <span className="text-xs text-gray-400 font-medium">
+                {getSkillLevel(skill.percentage)}
+              </span>
+            </div>
           </motion.div>
         ))}
       </div>
@@ -196,112 +205,154 @@ const Skills: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>(
     skillCategories[0].name
   );
-
-  const maxSkills: number = Math.max(
-    ...skillCategories.map((c) => c.skills.length)
-  );
-  const desktopMinHeight: string = `min(100vh - 200px, ${maxSkills * 90 + 120}px)`;
-
-  const handleCategoryClick = (categoryName: string) => {
-    setSelectedCategory(categoryName);
-  };
+  const [isHovering, setIsHovering] = useState(false);
 
   return (
-    <section className="w-full min-h-screen bg-[#0b0f19] text-white font-sans flex flex-col items-center justify-center relative py-4">
-      <div className="absolute inset-0 pointer-events-none blur-3xl opacity-30 z-0 select-none">
-        <div className="w-[600px] h-[600px] bg-sky-400/10 absolute -top-40 -left-40 rounded-full" />
-        <div className="w-[400px] h-[400px] bg-blue-300/10 absolute bottom-0 right-0 rounded-full" />
+    <section
+      id="skills"
+      className="w-full min-h-screen bg-[#0b0f19] text-white font-sans flex flex-col items-center justify-center relative py-16 overflow-hidden"
+    >
+      {/* Animated background elements */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        {[...Array(10)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute rounded-full opacity-10 blur-3xl"
+            style={{
+              background: "linear-gradient(120deg, #38bdf8, #0ea5e9)",
+              width: `${Math.random() * 400 + 100}px`,
+              height: `${Math.random() * 400 + 100}px`,
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              x: [0, Math.random() * 100 - 50],
+              y: [0, Math.random() * 100 - 50],
+            }}
+            transition={{
+              duration: 20 + Math.random() * 20,
+              repeat: Infinity,
+              repeatType: "reverse",
+            }}
+          />
+        ))}
       </div>
-      <div className="relative z-10 w-full max-w-7xl flex flex-col items-center justify-center px-4 sm:px-8 py-4 overflow-y-auto">
-        <h2 className="text-4xl sm:text-5xl font-extrabold text-center my-12 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-400 select-none tracking-tight sm:mb-10">
-          Tech Stack & Toolbox
-        </h2>
-        <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-center text-muted-foreground mb-12 max-w-2xl"
-          >
-            A showcase of my technical skills and proficiencies, honed through practice and innovation.
-          </motion.p>
+
+      <div className="relative z-10 w-full max-w-7xl flex flex-col items-center px-4 sm:px-8 py-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
+        >
+          <h2 className="text-4xl sm:text-5xl font-extrabold text-center mb-4">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">
+              Tech Stack
+            </span>{" "}
+            <span className="text-primary">& Toolbox</span>
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto my-4 rounded-full" />
+          <p className="text-lg text-sky-200/80 max-w-2xl mx-auto">
+            A showcase of my technical skills and proficiencies, honed through
+            practice and innovation.
+          </p>
+        </motion.div>
 
         {/* Desktop Layout */}
         <div className="hidden lg:flex w-full items-start justify-center gap-8 xl:gap-16">
-          {/* Image Container - Centered with skills */}
+          {/* Category Navigation */}
           <motion.div
-            className="flex-shrink-0 sticky top-32 self-start mt-8"
-            whileHover={{ rotate: 8, scale: 1.07 }}
-            transition={{ type: "spring", stiffness: 200, damping: 15 }}
-            style={{
-              width: 320,
-              height: 320,
-              minWidth: 180,
-              minHeight: 180,
-              maxWidth: 340,
-              maxHeight: 340,
-            }}
+            className="flex-shrink-0 sticky top-32 self-start"
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
           >
-            <img
-              src="/images/ProjectImage.png"
-              alt="Skills Illustration"
-              className="block mx-auto my-0 w-full h-full object-cover rounded-3xl shadow-2xl border border-cyan-400/20 bg-[#101828]"
-              draggable={false}
-            />
+            <div className="flex flex-col gap-3 p-4 rounded-2xl backdrop-blur-lg bg-[#0f172a]/30 border border-sky-500/20">
+              {skillCategories.map((category) => (
+                <motion.button
+                  key={category.name}
+                  className={`flex items-center px-6 py-4 rounded-xl text-lg font-medium transition-all duration-300 ${
+                    selectedCategory === category.name
+                      ? `bg-gradient-to-r ${category.gradient} text-white shadow-lg shadow-sky-500/20`
+                      : "text-gray-400 hover:text-gray-200 hover:bg-[#1e293b]/50"
+                  } whitespace-nowrap min-w-[250px]`}
+                  onClick={() => setSelectedCategory(category.name)}
+                  whileHover={{
+                    scale: 1.03,
+                    backgroundColor:
+                      selectedCategory !== category.name
+                        ? "rgba(30, 41, 59, 0.7)"
+                        : undefined,
+                  }}
+                  whileTap={{ scale: 0.97 }}
+                >
+                  <span className="not-gradient-emoji mr-3 text-2xl">
+                    {icons[category.name]}
+                  </span>
+                  <span>{category.name}</span>
+                </motion.button>
+              ))}
+            </div>
           </motion.div>
 
           {/* Content Area */}
-          <div className="flex-1 flex flex-row gap-8 xl:gap-12">
-            <nav className="w-64 xl:w-72 flex-shrink-0 sticky top-32 self-start">
-              <div className="flex flex-col gap-4">
-                {skillCategories.map((category) => (
-                  <motion.button
-                    key={category.name}
-                    className={`flex items-center px-4 xl:px-6 py-3 xl:py-4 rounded-xl text-base xl:text-lg font-medium transition-all duration-300 ${
-                      selectedCategory === category.name
-                        ? `bg-sky-500/20 text-sky-300 border border-sky-500/30 shadow-md shadow-sky-400/20`
-                        : "text-gray-400 hover:text-gray-200 hover:bg-[#1e293b]/50"
-                    } whitespace-nowrap`}
-                    onClick={() => handleCategoryClick(category.name)}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <span className="not-gradient-emoji mr-3 text-xl">
-                      {icons[category.name]}
-                    </span>
-                    <span>{category.name}</span>
-                  </motion.button>
-                ))}
-              </div>
-            </nav>
-            <div className="flex-1" style={{ minHeight: desktopMinHeight }}>
-              {skillCategories
-                .filter((category) => category.name === selectedCategory)
-                .map((category) => (
-                  <SkillCategory key={category.name} category={category} />
-                ))}
-            </div>
-          </div>
+          <motion.div
+            className="flex-1 rounded-3xl backdrop-blur-xl bg-[#0f172a]/30 border border-sky-500/20 p-8 overflow-hidden"
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={selectedCategory}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+              >
+                {skillCategories
+                  .filter((category) => category.name === selectedCategory)
+                  .map((category) => (
+                    <SkillCategory key={category.name} category={category} />
+                  ))}
+              </motion.div>
+            </AnimatePresence>
+          </motion.div>
         </div>
 
         {/* Mobile Layout */}
         <div className="flex flex-col lg:hidden w-full max-w-full mx-auto items-center px-2 pb-4">
-          <motion.div
-            whileHover={{ rotate: -8, scale: 1.07 }}
-            transition={{ type: "spring", stiffness: 200, damping: 15 }}
-            className="flex items-center justify-center w-full my-6"
-            style={{ width: 180, height: 180, maxWidth: "100%" }}
-          >
-            <img
-              src="/images/ProjectImage.png"
-              alt="Skills Illustration"
-              className="block mx-auto my-0 w-full h-full object-cover rounded-2xl shadow-2xl border border-sky-500/20 bg-[#101828]"
-              draggable={false}
-            />
-          </motion.div>
-          {skillCategories.map((category) => (
-            <SkillCategory key={category.name} category={category} />
-          ))}
+          <div className="w-full mb-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+              {skillCategories.map((category) => (
+                <motion.button
+                  key={category.name}
+                  className={`flex flex-col items-center justify-center p-3 rounded-xl text-sm font-medium transition-all ${
+                    selectedCategory === category.name
+                      ? `bg-gradient-to-r ${category.gradient} text-white shadow-lg shadow-sky-500/20`
+                      : "text-gray-400 hover:text-gray-200 bg-[#1e293b]/50"
+                  }`}
+                  onClick={() => setSelectedCategory(category.name)}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="not-gradient-emoji text-2xl mb-1">
+                    {icons[category.name]}
+                  </span>
+                  <span className="text-center text-xs">{category.name}</span>
+                </motion.button>
+              ))}
+            </div>
+          </div>
+
+          {skillCategories
+            .filter((category) => category.name === selectedCategory)
+            .map((category) => (
+              <SkillCategory key={category.name} category={category} />
+            ))}
         </div>
 
         <style>
@@ -311,25 +362,6 @@ const Skills: React.FC = () => {
               color: inherit !important;
               filter: none !important;
               font-variant-emoji: emoji;
-            }
-            html, body {
-              overflow-x: hidden;
-              max-width: 100vw;
-            }
-            ::-webkit-scrollbar {
-              width: 8px;
-            }
-            ::-webkit-scrollbar-thumb {
-              background-color: rgba(56, 189, 248, 0.5);
-              border-radius: 4px;
-            }
-            @keyframes pulse {
-              0% { opacity: 0.2; }
-              50% { opacity: 0.4; }
-              100% { opacity: 0.2; }
-            }
-            .animate-pulse {
-              animation: pulse 2s infinite;
             }
           `}
         </style>

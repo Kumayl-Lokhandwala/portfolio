@@ -1,47 +1,71 @@
 import { useRef } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import Hero from "./components/Hero";
 import Experience from "./components/Experience";
 import Navbar from "./components/Navbar";
 import ProjectsSection from "./components/ProjectsSection";
 import Skills from "./components/Skills";
 import ContactMe from "./components/ContactMe";
+import Resume from "./components/Resume";
 
-const App = () => {
+const AppContent = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
+
+  // Check if we're on the resume page
+  const isResumePage = location.pathname === "/resume";
 
   return (
     <>
-      <Navbar scrollRef={scrollRef} />
+      {!isResumePage && <Navbar scrollRef={scrollRef} />}
+
       <div
         ref={scrollRef}
-        className="h-screen overflow-y-auto scroll-smooth overflow-x-hidden"
+        className={`${isResumePage ? "bg-black" : ""} ${
+          isResumePage ? "h-screen" : "h-screen"
+        } overflow-y-auto scroll-smooth overflow-x-hidden`}
       >
-        {/* Hero Section - Let it determine its own height */}
-        <section id="hero" className="snap-start">
-          <Hero />
-        </section>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <section id="hero" className="snap-start">
+                  <Hero />
+                </section>
+                <section id="experience" className="snap-start">
+                  <Experience />
+                </section>
+                <section id="projects" className="snap-start">
+                  <ProjectsSection />
+                </section>
+                <section id="skills" className="snap-start">
+                  <Skills />
+                </section>
+                <section id="contact" className="snap-start">
+                  <ContactMe />
+                </section>
+              </>
+            }
+          />
 
-        {/* Experience Section - Let it determine its own height */}
-        <section id="experience" className="snap-start">
-          <Experience />
-        </section>
-
-        {/* Projects Section - Let it determine its own height */}
-        <section id="projects" className="snap-start">
-          <ProjectsSection />
-        </section>
-
-        {/* Skills Section - Let it determine its own height */}
-        <section id="skills" className="snap-start">
-          <Skills />
-        </section>
-
-        {/* Contact Section - Let it determine its own height */}
-        <section id="contact" className="snap-start">
-          <ContactMe />
-        </section>
+          <Route path="/resume" element={<Resume />} />
+        </Routes>
       </div>
     </>
+  );
+};
+
+const App = () => {
+  return (
+    <Router>
+      <AppContent />
+    </Router>
   );
 };
 
