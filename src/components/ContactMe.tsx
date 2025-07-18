@@ -333,25 +333,27 @@ const ContactMe: React.FC = () => {
                   Direct Contact
                 </h4>
                 <div className="space-y-4">
-                  <div className="flex items-center space-x-4 p-3 bg-[#0f172a]/50 border border-sky-500/20 rounded-xl">
+                  {/* Email */}
+                  <div className="flex items-start space-x-4 p-3 bg-[#0f172a]/50 border border-sky-500/20 rounded-xl">
                     <div className="bg-gradient-to-r from-sky-500 to-cyan-400 p-3 rounded-xl">
                       <FiMail className="text-white text-xl" />
                     </div>
                     <div>
                       <p className="text-sm text-sky-200/80">Email</p>
-                      <p className="text-gray-200 font-medium">
+                      <p className="text-gray-200 font-medium break-all">
                         kumayllokhandwala04@gmail.com
                       </p>
                     </div>
                   </div>
 
-                  <div className="flex items-center space-x-4 p-3 bg-[#0f172a]/50 border border-sky-500/20 rounded-xl">
+                  {/* Phone */}
+                  <div className="flex items-start space-x-4 p-3 bg-[#0f172a]/50 border border-sky-500/20 rounded-xl">
                     <div className="bg-gradient-to-r from-sky-500 to-cyan-400 p-3 rounded-xl">
                       <FiPhone className="text-white text-xl" />
                     </div>
                     <div>
                       <p className="text-sm text-sky-200/80">Phone</p>
-                      <p className="text-gray-200 font-medium">
+                      <p className="text-gray-200 font-medium break-words">
                         +91 9004372229
                       </p>
                     </div>
